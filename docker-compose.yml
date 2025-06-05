@@ -49,6 +49,6 @@ volumes:
 
 networks:
   infra:
-    external: true
-    name: infra
+    external:
+      name: infra
   internal:
