@@ -8,6 +8,6 @@ echo "Starting services..."
 docker-compose -f "${CURRENT_DIR}/../docker-compose.yml" up -d
 
 echo "Updating permissions for writeable dirs..."
-docker-compose -f "${CURRENT_DIR}/../docker-compose.yml" exec leadpay chmod a+w /var/www/html/var/log -R
-docker-compose -f "${CURRENT_DIR}/../docker-compose.yml" exec leadpay chmod a+w /var/www/html/var/report -R
-docker-compose -f "${CURRENT_DIR}/../docker-compose.yml" exec leadpay chmod a+w /var/www/html/media -R
+docker-compose -f "${CURRENT_DIR}/../docker-compose.yml" exec magento chmod a+w /var/www/html/var/log -R
+docker-compose -f "${CURRENT_DIR}/../docker-compose.yml" exec magento chmod a+w /var/www/html/var/report -R
+docker-compose -f "${CURRENT_DIR}/../docker-compose.yml" exec magento chmod a+w /var/www/html/media -R
