@@ -1,0 +1,35 @@
+
+.place-list {
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    width: 100%;
+    min-height: 1px;
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 50px;
+    @media (min-width: 480px) {
+      -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+      max-width: 50%;
+    }
+    @media (min-width: 576px) {
+      -ms-flex: 0 0 33.333333%;
+          flex: 0 0 33.333333%;
+      max-width: 33.333333%;
+    }
+  }
+  .place {
+    height: 100%;
+    padding: 30px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #F4F5FA;
+    .name {
+      font-size: 21px;
+      font-weight: 700;
+      color: @primaryColor;
+    }
+  }
+}

@@ -1,0 +1,157 @@
+
+.onestepcheckout-index-index {
+  .main-container { padding: 15px 0; }
+  .container-fluid { padding: 0; }
+  .coupon-code-form { padding-top: 10px; }
+  .onestepcheckout-personal-information { margin-top: 16px; }
+  .form-list li li,
+  #onestepcheckout-personal-information-list li { margin-bottom: 10px; }
+  .wide {
+    label {
+      padding-left: 0;
+      margin-bottom: 4px;
+    }
+    &.inline-block {
+      display: flex;
+      margin-top: 12px;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  .are-not-you a {
+    color: #ec1922;
+    line-height: 1;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: inline-block;
+    background-color: #eee;
+    &:hover {
+      color: #333;
+      text-decoration: none;
+      background-color: #e5e5e5;
+    }
+  }
+}
+
+.onestepcheckout {
+  margin-bottom: 50px;
+  .left,
+  .osc-title {
+    display: flex;
+    padding-left: 4px;
+    align-items: center;
+    margin-bottom: 10px;
+    i {
+      font-size: 21px;
+      margin-right: 10px;
+      color: @primaryColor;
+    }
+    h2 {
+      color: #060101;
+      line-height: 1;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
+    + .button-login {
+      top: 0;
+      padding: 0;
+      right: 28px;
+      color: #999;
+      line-height: 1;
+      background: none;
+      position: absolute;
+      + .social-logins {
+        .facebook-button {
+          margin: 0;
+          top: -1px;
+          padding: 0;
+          right: -5px;
+          width: 22px;
+          line-height: 1;
+          border-radius: 0;
+          overflow: hidden;
+          background: none;
+          position: absolute;
+          text-indent: -169px;
+          .facebook-p { margin-top: 0; }
+        }
+      }
+    }
+  }
+  .pagarme-cc-expr-month { width: 88px !important; }
+  .pagarme-cc-expr-month select.month { width: 84px !important; }
+  .payment_method_pagarme_boleto.method-icons { font-size: 36px; }
+  .collapse-coupon {
+    cursor: pointer;
+    margin-top: 15px;
+  }
+}
+
+.col-main .offline-payment-card-details {
+  margin-bottom: 50px;
+  padding: 10px !important;
+  padding-left: 10px !important;
+}
+
+.pagarme_boleto-form > .form-list { padding: 10px 0 0 20px !important; }
+.payment_method_pagarme_cc > .form-list { padding: 15px 0 0 10px !important; }
+.pagarme_cc-form > .form-list {
+  padding: 0 !important;
+  @media (min-width: 768px) {
+    padding: 0 0 0 20px !important;
+  }
+}
+
+.confirmed-button { margin: 20px 10px 10px; }
+
+.title-payment { font-size: 18px; }
+
+.order-info > span {
+  display: block;
+  &.customer-name {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  &.order-incrementid,
+  &.order-date,
+  &.shipping-address { font-size: 13px; }
+}
+
+.offline-payment-card-details select { max-width: 365px; }
+
+.loggi-number-warning {
+  margin-bottom: 10px;
+  color: black;
+  border-left: 5px solid #e26703;
+  background-color: #f9ebe6;
+  position: relative;
+  margin-bottom: 5px;
+  padding: 0px 0px 0px 10px;
+  font-size: 12px;
+}
+
+.onestepcheckout-login {
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border: 1px solid #d0d7dd;
+  .full.login .button-login {
+    top: 12px;
+    right: 15px;
+  }
+}
+
+.onestepcheckout-cart-table {
+  .lc-thumbnails { width: 90px; }
+  .product-name {
+    font-size: 13px;
+    @media (min-width: 768px) { min-width: 120px; }
+  }
+}
+
+.onestepcheckout-review-terms-description-container{
+  display: none;
+}

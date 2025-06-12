@@ -1,0 +1,317 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+
+$_configHelper = Mage::helper('onestepcheckout/config');
+?><div id="onestepcheckout-address" class="onestepcheckout-add-loader-into-this-block">
+    <?php if(!$this->isCustomerLoggedIn()): ?>
+        <?php if(!$_configHelper->isMailCheckoutEnable()):?>
+            <div class="left collapse-personal-information">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <h2><?php echo $this->__('Personal Information'); ?></h2>
+            </div>
+        <?php endif;?>
+        <div class="onestepcheckout-login">
+            <?php if($_configHelper->isMailCheckoutEnable()):?>
+                <div id="onestepcheckout-personal-information" class="onestepcheckout-add-loader-into-this-block">
+                    <div class="onestepcheckout-wrapper-left-collumn">
+                        <?php echo $this->getChildHtml('personal.information'); ?>
+                    </div>
+                </div>
+            <?php else:?>
+                <div class="full login">
+                    <span class="text">Faça seu login:</span>
+                    <button type="button" class="button-login">
+                        <span class="login"><?php echo $this->__("Login");?></span>
+                    </button>                  
+                </div>
+                <div class="social-logins">
+                    <?php echo $this->getChildHtml('belvg_facebook_buttoncheckout'); ?>
+                    <div style="margin-bottom: 0;margin-top: 3px;margin-left: 15px; min-width: 270px;" >
+                        <?php echo $this->getChildHtml('googleoauth2.button'); ?>
+                    </div>
+                </div>
+            <?php endif;?>
+        </div>
+    <?php endif; ?>
+    <div id="onestepcheckout-address-billing-wrapper">
+        <?php $opacity = false;?>
+        <?php if(!$this->isCustomerLoggedIn() && !$this->hasSessionCustomerId()): ?>
+            <div class="without-register collapse-address">
+                <span class="text"><?php echo $this->__("Don't have a registration? Fill in your details below and complete your purchase simply:")?></span>
+            </div>
+            <?php if($_configHelper->isMailCheckoutEnable()):?>
+                <?php $opacity = true;?>
+            <?php endif;?>
+        <?php endif;?>
+        <div class="step a-item <?php if($opacity): ?>opacity<?php endif;?>">
+            <?php echo $this->getChildHtml('billing'); ?>
+        </div>
+    </div>
+    <?php if (!$this->isUseBillingAsShipping()): ?>
+        <div id="onestepcheckout-address-shipping-wrapper" style="overflow: hidden;height: 0px;display:none;">
+            <?php if($this->isCustomerLoggedIn() || $this->hasSessionCustomerId() || !$this->getConfig()->isMailCheckoutEnable()): ?>
+                <?php if(Mage::getStoreConfig('onestepcheckout/general/is_show_titles')): ?>
+                    <div class="left">
+                        <i class="fa fa-address-book" aria-hidden="true"></i>
+                        <h2><?php echo $this->__('SHIPPING ADDRESS'); ?></h2>
+                    </div>
+                    <div class="step a-item">
+                        <?php echo $this->getChildHtml('shipping'); ?>
+                    </div>
+                <?php endif;?>
+            <?php endif;?>
+        </div>
+    <?php endif;?>
+</div>
+<script type="text/javascript">
+    var jsonInitializeAddress = {
+        containerSelector: '#onestepcheckout-address',
+        useBillingAsShippingCheckboxId: "billing:use_for_shipping",
+        billing: {
+            containerSelector: '#onestepcheckout-address-billing-wrapper',
+            pleaseWaitPostcodSelector: '.onestepcheckout-postcod-process',
+            changeAddressSelectSelector: '#billing-address-select',
+            changeAddressRadioSelector: 'billing_address_id',
+            newAddressContainerSelector: '#onestepcheckout-billing-address-list',
+            createAccountInputId: 'billing:create_account',
+            passwordContainerSelector: '#osc-billing-password-area',
+            postcodeInputElement:'billing:postcode',
+            street2InputElement:'billing:street2',
+            addressChangeTriggerElementsIds: [
+                'billing:country_id',
+                'billing:region',
+                'billing:region_id',
+                'billing:city',
+                'billing:postcode'
+            ],
+            addressCountryRegionElementsIds: {
+                'countryId' : 'billing:country_id',
+                'region'    : 'billing:region',
+                'regionId'  : 'billing:region_id'
+            }
+        },
+        shipping: {
+            containerSelector: '#onestepcheckout-address-shipping-wrapper',
+            changeAddressSelectSelector: '#shipping-address-select',
+            changeAddressRadioSelector: 'shipping_address_id',
+            newAddressContainerSelector: '#onestepcheckout-shipping-address-list',
+            postcodeInputElement:'shipping:postcode',
+            street2InputElement:'shipping:street2',
+            addressChangeTriggerElementsIds: [
+                'shipping:country_id',
+                'shipping:region',
+                'shipping:region_id',
+                'shipping:city',
+                'shipping:postcode'
+            ],
+            addressCountryRegionElementsIds: {
+                'countryId' : 'shipping:country_id',
+                'region'    : 'shipping:region',
+                'regionId'  : 'shipping:region_id'
+            }
+        },
+        addressChangedUrl: <?php echo Zend_Json::encode($this->getAddressChangedUrl());?>,
+        saveAddressUrl: <?php echo Zend_Json::encode($this->getSaveFormValuesUrl());?>
+    };
+    $regionJson = <?php echo $this->helper('directory')->getRegionJson() ?>;
+    function setMasks() {
+        $j('input[alt]').setMask();
+        $j('input[alt="phone"]').each(function(){
+            $j(this).setMask("(99) 9999-99999").on("blur", function(event) {
+                var phone = $j(this).val(),
+                    unmaskedPhone = $j(this).val().replace(/\D/g, ''),
+                    mask;
+
+                $j(this).unsetMask();
+                if(unmaskedPhone.length > 10) {
+                    mask = "(99) 99999-9999";
+                } else {
+                    mask = "(99) 9999-99999";
+                }
+                $j(this).setMask(mask);
+
+                phone = $j(this).val(); // get new masked value
+                //var self = $(this);
+                if (phone.length < 14 && phone.length != 0){
+                    alert("Telefone inserido é invalido, tente novamente utilizando um telefone correto.");
+                    $j(this).val('');
+                    event.preventDefault();
+                    $j(this).focus();
+                }
+            }).trigger("blur");
+        });
+    }
+    function initializeLoginButton() {
+        var $btnAuthenticationOSC = $j('.onestepcheckout .onestepcheckout-login button');
+        if ($btnAuthenticationOSC.length) {
+            $btnAuthenticationOSC.magnificPopup({
+                items: [
+                    {
+                        src: '#onestepcheckout-authentification',
+                        type: 'inline'
+                    }
+                ],
+                removalDelay: 500,
+                mainClass: 'mfp-fade',
+            });
+        }
+    }
+    function initializeBillingScripts() {
+        var OSCAddress = new OnestepcheckoutAddress(jsonInitializeAddress);
+        if($j("#onestepcheckout-billing-address-list").length > 0) {
+            //<![CDATA[
+                var billingRegionUpdater = new RegionUpdater('billing:country_id', 'billing:region', 'billing:region_id', $regionJson, undefined, 'billing:postcode');
+                <?php if (!$this->hasSessionCustomerId() && !$this->isCustomerLoggedIn()) : ?>
+                    $$("input[name*='radio_tipopessoa']").invoke('on', 'click', function() {
+                        var sel = $('billing:tipopessoa');
+                        setTipopessoaArea(this.value);
+                        for (var i = 0; i < sel.options.length; i++) {
+                            if (sel.options[i].text == this.value) {
+                                sel.options[i].selected = true;
+                            }
+                        }
+
+                    });
+                    function setTipopessoaArea(arg){
+
+                        if (arg == 'Jurídica') {
+                            if ($('billing:taxvat')) {
+                                $('billing:ie').maxLength = 30;
+                                $$('label[for="billing:ie"]').first().update('<em>*</em>IE (Inscrição Estadual)');
+                                $$('label[for="billing:taxvat"]').first().update('<em>*</em>CNPJ');
+                                $$('label[for="billing:firstname"]').first().update('<em>*</em>Razão social');
+                                $$('label[for="billing:lastname"]').first().update('<em>*</em>N. Fantasia');
+                                $('osc-billing-tipopessoa-area').hide();
+                                jQuery(".ie-container").show();
+                                jQuery('#billing\\:taxvat').setMask("99.999.999/9999-99");
+                            }
+                        } else {
+                            if ($('billing:taxvat')) {
+                                $('billing:ie').maxLength = 30;
+                                $$('label[for="billing:taxvat"]').first().update('<em>*</em>CPF');
+                                $$('label[for="billing:ie"]').first().update('<em>*</em>RG');
+                                $$('label[for="billing:firstname"]').first().update('<em>*</em>Nome');
+                                $$('label[for="billing:lastname"]').first().update('<em>*</em>Sobrenome');
+                                $('osc-billing-tipopessoa-area').show();
+                                jQuery(".ie-container").hide();
+                                jQuery('#billing\\:taxvat').setMask("999.999.999-99");
+                            }
+                        }
+                    }
+                    <?php if (is_null($this->getDataFromSession('radio_tipopessoa'))): ?>
+                        $j('[name*=radio_tipopessoa]')[0].click();
+                    <?php else: ?>
+                        if ($('billing:tipopessoa')) {
+                            setTipopessoaArea('<?php echo $this->getDataFromSession('radio_tipopessoa') ?>');
+                        }
+                    <?php endif; ?>
+
+                    Validation.add('validate-email-exist', '<?php echo $this->__('Please enter a valid email address. For example johndoe@domain.com.') ?>', function(value) {
+                        if (checkMail(value)) {
+                            var ok = false;
+                            var url = BASE_URL + 'onestepcheckout/ajax/check_email/';
+                            new Ajax.Request(url, {
+                                method: 'post',
+                                asynchronous: false,
+                                parameters: 'email=' + encodeURIComponent(value),
+                                onSuccess: function(transport) {
+                                    var obj = response = eval('(' + transport.responseText + ')');
+                                    validateTrueEmailMsg = obj.status_desc;
+                                        if (obj.result !== 'clean') {
+                                            Validation.get('validate-email-exist').error = 'Email já cadastrado';
+                                                ok = false;
+                                        } else {
+                                                ok = true;
+                                        }
+                                    },
+                                    onComplete: function() {
+                                        if ($('advice-validate-email-exist-billing:email')) {
+                                          $('advice-validate-email-exist-billing:email').remove();
+                                        }
+                                    }
+                                });
+                            return ok;
+                        }else{
+                            Validation.get('validate-email').error = '<?php echo $this->__('Please enter a valid email address. For example johndoe@domain.com.') ?>';
+                        }
+                    });
+                    Validation.add('validate-taxvat', '<?php echo $this->__('This is a required field.') ?>', function(value) {
+                        if (validaCPF(value,0)) {
+                            return true;
+                         }else{
+                            Validation.get('validate-taxvat').error = 'O CNPJ/CPF informado \xE9 inválido';
+                         }
+                    });
+                <?php endif; ?>
+                Validation.add('validate-zip-br', '<?php echo $this->__('Please enter a valid zip code. e.g. 12345-678.') ?>', function(v) {
+                    return Validation.get('IsEmpty').test(v) || /(^\d{8}$)|(^\d{5}-\d{3}$)/.test(v);
+                });
+                Validation.add('validate-phone-br', '<?php echo $this->__('Please enter a valid phone number. for example, (xx) x4567-8900.') ?>', function(v) {
+                    return Validation.get('IsEmpty').test(v) || /^(\()?\d{2}(\))?(-|\s)?\d{5}(-|\s)\d{4}|(\()?\d{2}(\))?(-|\s)?\d{4}(-|\s)\d{4}$/.test(v);
+                });
+                
+                if ($('billing:taxvat')) {
+                    $('billing:taxvat').addClassName('validate-taxvat');
+                }
+                
+                if ($('billing:telephone')) {
+                    $('billing:telephone').addClassName('validate-phone-br');
+                }
+                if ($('billing:fax')) {
+                    $('billing:fax').addClassName('validate-phone-br');
+                }
+                if ($('billing:postcode')) {
+                    $('billing:postcode').addClassName('validate-zip-br');
+                }
+                if ($('billing:street1')) {
+                    $('billing:street1').observe('keyup', function(event) {
+                        this.maxLength = 100;
+                    });
+                }
+                if ($('billing:street2')) {
+                    $('billing:street2').observe('keyup', function(event) {
+                        this.maxLength = 10;
+                    });
+                }
+                if ($('billing:street3')) {
+                    $('billing:street3').observe('keyup', function(event) {
+                        this.maxLength = 50;
+                    });
+                }
+                if ($('billing:street4')) {
+                    $('billing:street4').observe('keyup', function(event) {
+                        this.maxLength = 50;
+                    });
+                }
+                if ($('billing:city')) {
+                    $('billing:city').observe('keyup', function(event) {
+                        this.maxLength = 100;
+                    });
+                }
+                if ($('billing:day')) {
+                    $('billing:day').observe('keyup', function(event) {
+                        this.maxLength = 2;
+                        mascara(this, sonumeros);
+                    });
+                    $('billing:month').observe('keyup', function(event) {
+                        this.maxLength = 2;
+                        mascara(this, sonumeros);
+                    });
+                    $('billing:year').observe('keyup', function(event) {
+                        this.maxLength = 4;
+                        mascara(this, sonumeros);
+
+                    });
+                }
+            //]]>
+            setMasks();
+            initializeLoginButton();
+        }
+    }
+    initializeBillingScripts();
+</script>

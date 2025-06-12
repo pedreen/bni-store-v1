@@ -1,0 +1,61 @@
+<?php
+
+/**
+ * @Author: Warley Elias
+ * @Date:   2020-11-11 11:18:05
+ * @Last Modified by: Warley Elias
+ * @Last Modified time: 2022-07-11 13:05:06
+ */
+?>
+<?php
+$_coreHelper = $this->helper('core');
+$_product = $this->getProduct();
+//$prices = Mage::helper('spp')->getCheapestChildPrice($_product);
+$_helperCoreCustomizations = Mage::helper('corecustomizations');
+$valorMinParcela = $_helperCoreCustomizations->getValorMinParcela();
+$parcelamento = $_helperCoreCustomizations->getParcelamento();
+$price = false;
+?>
+<div class="wrapper-price-installments">
+	<div class="price-box">
+		<?php if ($_product->getPrice() != $_product->getFinalPrice()) : ?>
+			<?php $price = $_product->getFinalPrice() ?>
+			<p class="old-price">
+				<span class="price-label"><?php echo $this->__('De:') ?></span>
+				<span class="price" id="old-price-<?php echo $_product->getId() ?><?php echo $this->getIdSuffix() ?>">
+					<?php echo $_coreHelper->currency($_product->getPrice(), true, true); ?>
+				</span>
+			</p>
+			<p class="special-price">
+				<span class="price-label"><?php echo $this->__('Por:') ?></span>
+				<span class="price" id="product-price-<?php echo $_product->getId() ?><?php echo $this->getIdSuffix() ?>">
+					<?php echo $_coreHelper->currency($_product->getFinalPrice(), true, true); ?>
+				</span>
+			</p>
+		<?php else : ?>
+			<?php $price = $_product->getPrice() ?>
+			<div>
+				<p class="regular-price">
+					<span class="price-label"><?php echo $this->__('Por:') ?></span>
+					<span class="price" id="product-price-<?php echo $_product->getId() ?><?php echo $this->getIdSuffix() ?>">
+						<?php echo $_coreHelper->currency($_product->getPrice(), true, true); ?>
+					</span>
+				</p>
+			</div>
+		<?php endif; ?>
+	</div>
+	<?php if ($price) : ?>
+		<?php $totalParcelas = 0; ?>
+		<?php $i = 1; ?>
+		<?php for ($i = 1; $i <= $_helperCoreCustomizations->getParcelasSemJuros(); $i++) : ?>
+			<?php if ($price / $i > $valorMinParcela) : ?>
+				<?php $totalParcelas++; ?>
+			<?php endif; ?>
+		<?php endfor; ?>
+		<?php $totalParcelas = $totalParcelas ? $totalParcelas : 1; ?>
+		<div class="installment">
+			<span class="installments"><?php echo $totalParcelas; ?>x</span> de
+			<span class="installment-price"><?php echo $_coreHelper->currency(($price / $totalParcelas), true, false) ?></span> sem juros
+		</div>
+	<?php endif; ?>
+</div>

@@ -1,0 +1,186 @@
+
+.cms-index-index {
+  .main-slider {
+    min-height: 20.833vw;
+    .camera_wrap .camera_pag .camera_pag_ul {
+      left: 0;
+      right: 0;
+      bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media (min-width: 768px) { bottom: 25px; }
+      li {
+        margin: 8px;
+        width: 12px;
+        height: 12px;
+        background-color: #fff;
+        @media (min-width: 768px) {
+          width: 16px;
+          height: 16px;
+          margin: 20px 12px;
+        }
+        > span {
+          top: 3px;
+          left: 3px;
+          width: 6px;
+          height: 6px;
+          @media (min-width: 768px) {
+            top: 4px;
+            left: 4px;
+            width: 8px;
+            height: 8px;
+          }
+        }
+      }
+    }
+  }
+  .informacoes-adicionais-wrapper {
+    min-height: 52px;
+    position: relative;
+    margin-bottom: 20px;
+    background-color: #fff;
+    @media (min-width: 768px) {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    .informacoes-adicionais {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1220px;
+      margin-left: auto;
+      margin-right: auto;
+      > .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @media (min-width: 320px) {
+          -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+          max-width: 50%;
+        }
+        @media (min-width: 576px) {
+          -ms-flex: 0 0 33.333333%;
+          flex: 0 0 33.333333%;
+          max-width: 33.333333%;
+        }
+        @media (min-width: 1020px) {
+          -ms-flex-preferred-size: 0;
+          flex-basis: 0;
+          -ms-flex-positive: 1;
+          flex-grow: 1;
+          max-width: 100%;
+        }
+        + .item { border-left: 1px solid @secondaryColor; }
+      }
+    }
+    .icons {
+      @media (max-width: 767px) {
+        display: flex;
+        min-height: 65px;
+        padding: 10px 5px;
+        align-items: center;
+        justify-content: center;
+      }
+      @media (min-width: 768px) { padding: 0 15px; }
+      .icon {
+        padding-right: 15px;
+        i {
+          font-size: 24px;
+          color: @secondaryColor;
+        }
+      }
+      .text {
+        @media (min-width: 768px) { white-space: nowrap; }
+        span {
+          color: #595a5a;
+          display: block;
+          font-size: 16px;
+          line-height: 18px;
+          &.strong {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+    .todas-regras {
+      color: #fff;
+      line-height: 1;
+      text-align: center;
+      width: 100% !important;
+      background-color: #bdc3c7;
+      padding: 6px 10px !important;
+      transition: all 150ms ease-in-out;
+      a {
+        color: #fff;
+        display: block;
+        font-size: 11px;
+        text-transform: uppercase;
+        span { margin-right: 5px; }
+        &:hover { text-decoration: none; }
+      }
+      &:hover { background-color: @primaryColor; }
+    }
+  }
+  .instagram-mosaic {
+    margin-bottom: 30px;
+    .title {
+      a {
+        line-height: 1;
+        display: inline-block;
+        text-decoration: none;
+      }
+      i {
+        font-size: 24px;
+        color: @secondaryColor;
+      }
+      .account {
+        color: #a29c9d;
+        font-size: 16px;
+        font-weight: 600;
+        &:extend(.align-middle);
+      }
+    }
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: -8px;
+      margin-right: -8px;
+      > div {
+        &:extend(.col);
+        &.first {
+          @media (min-width: 768px) {
+            -ms-flex: 0 0 auto;
+                flex: 0 0 auto;
+            width: auto;
+            max-width: 283px;
+          }
+          @media (min-width: 992px) { max-width: 380px; }
+          @media (min-width: 1200px) { max-width: 450px; }
+        }
+        &.others {
+          display: flex;
+          flex-wrap: wrap;
+          -ms-flex-preferred-size: 0;
+              flex-basis: 0;
+          -ms-flex-positive: 1;
+              flex-grow: 1;
+          max-width: 100%;
+          a {
+            &:extend(.col);
+            -ms-flex: 0 0 33.333333%;
+                flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+          }
+        }
+      }
+      a {
+        padding: 8px;
+        display: block;
+        img {
+          &:extend(.img-responsive, .center-block);
+        }
+      }
+    }
+  }
+}

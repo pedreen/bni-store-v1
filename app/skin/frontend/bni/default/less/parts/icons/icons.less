@@ -1,0 +1,21 @@
+
+.@{belmicro-css-prefix} {
+  display: inline-block;
+  font: normal normal normal @belmicro-font-size-base/@belmicro-line-height-base BelmicroIcons; // shortening font declaration
+  font-size: inherit; // can't have font-size inherit on line above, so need to override
+  text-rendering: auto; // optimizelegibility throws things off #1094
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.@{belmicro-css-prefix}-user:before { content: @belmicro-var-user; }
+.@{belmicro-css-prefix}-cart:before { content: @belmicro-var-cart; }
+.@{belmicro-css-prefix}-trash:before { content: @belmicro-var-trash; }
+.@{belmicro-css-prefix}-search:before { content: @belmicro-var-search; }
+.@{belmicro-css-prefix}-payment:before { content: @belmicro-var-payment; }
+.@{belmicro-css-prefix}-truck:before { content: @belmicro-var-truck; }
+.@{belmicro-css-prefix}-refresh:before { content: @belmicro-var-refresh; }
+.@{belmicro-css-prefix}-review:before { content: @belmicro-var-review; }
+.@{belmicro-css-prefix}-whatsapp:before { content: @belmicro-var-whatsapp; }
+.@{belmicro-css-prefix}-nav:before { content: @belmicro-var-list; }
+.@{belmicro-css-prefix}-angle-right:before { content: @belmicro-var-angle-right; }

@@ -1,0 +1,69 @@
+<?php
+/* Mage_Core_Block_Template*/
+$_helperCoreCustomizations = Mage::helper('corecustomizations');
+$_coreHelper = Mage::helper('core');
+?>
+
+<div class="informacoes-adicionais-wrapper">
+	<div class="grid_12 informacoes-adicionais">
+		<?php if (Mage::helper('mobiledetect')->isMobile()) : ?>
+			<div class="carousel owl-carousel">
+			<?php endif; ?>
+			<div class="item frete-gratis icons">
+				<div class="icon">
+					<i class="fa fa-truck" aria-hidden="true"></i>
+				</div>
+				<div class="text">
+					<span class="strong">Entrega garantida</span>
+					<span>para todo o Brasil</span>
+				</div>
+			</div>
+			<?php $boletoBancarioIsActive = $_helperCoreCustomizations->isBoletoBancarioActive(); ?>
+			<?php $_promoRule = Mage::getModel('salesrule/rule')->load(1); ?>
+			<?php if ($boletoBancarioIsActive && $_promoRule->getIsActive() && $_promoRule->getDiscountAmount() > 0) : ?>
+				<div class="item desconto-boleto icons">
+					<div class="icon">
+						<i class="fa-brands fa-pix"></i>
+					</div>
+					<div class="text">
+						<span class="strong"><?php echo number_format($_promoRule->getDiscountAmount(), 0, ',', ' ') ?>% de desconto</span>
+						<span>no boleto ou Pix</span>
+					</div>
+				</div>
+			<?php endif; ?>
+			<?php if ($_helperCoreCustomizations->isCreditCardActive()) : ?>
+				<?php $valorMinParcela = $_helperCoreCustomizations->getValorMinParcela(); ?>
+				<?php $parcelamento = $_helperCoreCustomizations->getParcelamento(); ?>
+				<div class="item parcelamento icons">
+					<div class="icon">
+						<i class="fa fa-credit-card" aria-hidden="true"></i>
+					</div>
+					<div class="text">
+						<span class="strong"><?php echo $parcelamento ?>x Sem Juros</span>
+						<span>Parcela Mínima de <?php echo $_coreHelper->currency($valorMinParcela, true, false) ?></span>
+					</div>
+				</div>
+			<?php endif; ?>
+			<div class="item troca icons">
+				<div class="icon">
+					<i class="fa-solid fa-rotate"></i>
+				</div>
+				<div class="text">
+					<span class="strong">1ª troca grátis</span>
+					<span>em até 7 dias</span>
+				</div>
+			</div>
+			<div class="item troca icons">
+				<div class="icon">
+					<i class="fa-solid fa-lock"></i>
+				</div>
+				<div class="text">
+					<span class="strong">Compra segura</span>
+					<span>Site Protegido</span>
+				</div>
+			</div>
+			<?php if (Mage::helper('mobiledetect')->isMobile()) : ?>
+			</div>
+		<?php endif; ?>
+	</div>
+</div>

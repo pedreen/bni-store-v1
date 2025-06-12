@@ -1,0 +1,70 @@
+
+.input-text,
+select {
+	width: 100%;
+  color: #333;
+  height: 38px;
+	outline: none;
+	display: block;
+	font-size: 14px;
+  box-shadow: none;
+  line-height: 1.45;
+  padding: 6px 18px;
+  border-radius: 6px;
+	background-color: transparent;
+	transition: all .15s ease-in-out;
+  border: 1px solid fade(#000, 30%);
+  &:hover { border-color: fade(#000, 40%); }
+	&:focus { border-color: fade(#000, 50%) !important; }
+	&.validation-failed { border-color: #ee5b3c !important; }
+  &.qty {
+    padding: 0;
+    width: 50px;
+    border-radius: 10px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &.cvv { padding: 6px 10px; }
+  .input-group & { width: auto; min-width: 0; }
+}
+
+select {
+  padding-right: 30px;
+  display: inline-block;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+  background-repeat: no-repeat;
+  background-position: 100% 15px;
+  background-image: url("../images/arrow-select.png");
+}
+
+textarea.input-text { max-height: none; }
+
+.input-group { flex-wrap: nowrap; }
+.input-group-btn { padding-left: 10px; }
+
+.field-wrapper {
+	position: relative;
+  display: table;
+  border-collapse: separate;
+  input {
+  	position: relative;
+	  z-index: 2;
+	  float: left;
+	  border-right: 0;
+	  width: 100% !important;
+	  margin-bottom: 0;
+  }
+  .button-wrapper {
+  	width: 1%;
+  	display: table-cell;
+	  white-space: nowrap;
+	  vertical-align: middle;
+  }
+  .validation-advice { position: absolute; }
+}
+
+.input-radio > input {
+  margin-top: 0;
+  &:extend(.align-middle);
+}

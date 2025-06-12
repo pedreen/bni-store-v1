@@ -1,0 +1,198 @@
+
+.welcome-msg {
+  margin-bottom: 15px;
+  .hello { margin-bottom: 0; }
+}
+
+.my-account {
+	//margin-bottom: 30px;
+	p.required { margin-top: -40px; }
+	.buttons-set .back-link a {
+		small { display: none; }
+		&:extend(.button, .button.outline all);
+	}
+  .box-account { margin-bottom: 35px; }
+  .extract-filter {
+    margin-bottom: 15px;
+    @media (min-width: 576px) { width: 400px; }
+    .input-box {
+      position: relative;
+      img {
+        top: 10px;
+        right: 10px;
+        position: absolute;
+      }
+    }
+  }
+  .filter-report {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    .fields, .field { margin-bottom: 0; }
+    .field > label { padding-left: 20px; }
+    .input-text {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    + .buttons-set {
+      margin: 0;
+      border-top: 0;
+    }
+  }
+  #balance {
+    width: 300px;
+    display: flex;
+    margin: 0 -15px 15px;
+    > div {
+      padding-left: 15px;
+      padding-right: 15px;
+      -ms-flex-preferred-size: 0;
+          flex-basis: 0;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+      max-width: 100%;
+      &:first-child {
+        color: #00b894;
+        text-align: right;
+        .call { background-color: #00b894; }
+      }
+      &:last-child {
+        color: #74b9ff;
+        border-left: 1px solid #eee;
+        .call { background-color: #74b9ff; }
+      }
+      .call {
+        color: #fff;
+        line-height: 1;
+        padding: 4px 8px;
+        font-weight: 700;
+        font-style: normal;
+        border-radius: 4px;
+        margin-bottom: 5px;
+        display: inline-block;
+      }
+      label {
+        color: #999;
+        font-weight: 400;
+        margin-bottom: 0;
+        font-style: italic;
+      }
+      .value {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.1;
+      }
+    }
+  }
+  #extract {
+    .card {
+      margin-bottom: 15px;
+      &.disabled { opacity: .5; }
+      .extract {
+        display: flex;
+        align-items: center;
+        > a {
+          width: 100%;
+          display: inherit;
+          align-items: flex-start;
+          text-decoration: none;
+          &[aria-expanded="true"] .content {
+            border-radius: 4px 4px 0 0;
+            border-bottom-color: transparent;
+          }
+        }
+        .date {
+          width: 100%;
+          color: #fff;
+          display: flex;
+          min-height: 1px;
+          font-size: 11px;
+          padding: 5px 15px;
+          line-height: 1.18;
+          position: relative;
+          margin-right: 15px;
+          border-radius: 4px;
+          align-items: center;
+          flex-direction: column;
+          background-color: #ccc;
+          text-shadow: 0 1px 3px rgba(0,0,0,.3);
+          -ms-flex: 0 0 auto;
+              flex: 0 0 auto;
+          width: 52px;
+          max-width: none;
+          .day {
+            font-size: 18px;
+            font-weight: 700;
+          }
+          .month {
+            text-transform: uppercase;
+          }
+        }
+        .content {
+          width: 100%;
+          color: #aaa;
+          display: flex;
+          min-height: 1px;
+          padding: 10px 5px;
+          border-radius: 4px;
+          position: relative;
+          align-items: center;
+          border: 1px solid #ccc;
+          background-color: #eee;
+          -ms-flex-preferred-size: 0;
+              flex-basis: 0;
+          -ms-flex-positive: 1;
+              flex-grow: 1;
+          max-width: 100%;
+          > div {
+            min-height: 1px;
+            padding-left: 5px;
+            padding-right: 5px;
+            position: relative;
+            -ms-flex-preferred-size: 0;
+                flex-basis: 0;
+            -ms-flex-positive: 1;
+                flex-grow: 1;
+            max-width: 100%;
+            &.withdrawal { color: #e84118; }
+            &.deposit { color: #4cd137; }
+          }
+        }
+      }
+      .detail {
+        display: flex;
+        margin-left: 67px;
+        align-items: center;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        border-top-color: transparent;
+        &:last-child { border-radius: 0 0 4px 4px; }
+        @media (max-width: 575px) { flex-direction: column; }
+        &.deposit {
+          .transaction-id,
+          .value,
+          .total { color: #4cd137; }
+        }
+        &.withdrawal {
+          .transaction-id,
+          .value,
+          .total { color: #e84118; }
+        }
+        > div {
+          width: 100%;
+          padding: 10px;
+          -ms-flex-preferred-size: 0;
+              flex-basis: 0;
+          -ms-flex-positive: 1;
+              flex-grow: 1;
+          max-width: 100%;
+          .tax {
+            color: #aaa;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}

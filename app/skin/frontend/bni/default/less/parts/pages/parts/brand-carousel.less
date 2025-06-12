@@ -1,0 +1,54 @@
+
+.brand-carousel {
+  min-height: 80px;
+  @media (min-width: 768px) {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .owl-carousel {
+    padding-left: 60px;
+    padding-right: 60px;
+    .owl-nav {
+      left: 0;
+      right: 0;
+      top: 50%;
+      display: flex;
+      margin-top: -17px;
+      position: absolute;
+      align-items: center;
+      pointer-events: none;
+      justify-content: space-between;
+      > div {
+        width: 0;
+        height: 0;
+        pointer-events: auto;
+        border-top: 16px solid transparent;
+        border-bottom: 16px solid transparent;
+        &.owl-prev {
+          border-right: 16px solid #dedede;
+          @media (min-width: 768px) { border-right: 20px solid #dedede; }
+        }
+        &.owl-next {
+          border-left: 16px solid #dedede;
+          @media (min-width: 768px) { border-left: 20px solid #dedede; }
+        }
+        @media (min-width: 768px) {
+          border-top: 20px solid transparent;
+          border-bottom: 20px solid transparent;
+        }
+      }
+    }
+  }
+  .item {
+    padding: 10px;
+    display: flex;
+    min-height: 80px;
+    align-items: center;
+    justify-content: center;
+    img {
+      height: 40px;
+      max-width: 100%;
+      width: auto !important;
+    }
+  }
+}

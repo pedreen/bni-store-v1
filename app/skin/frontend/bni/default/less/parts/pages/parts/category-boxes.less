@@ -1,0 +1,29 @@
+
+.category-boxes {
+  padding-top: 30px;
+  padding-bottom: 15px;
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+    .box {
+      width: 100%;
+      min-height: 137px;
+      position: relative;
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-bottom: 15px;
+      @media (min-width: 576px) {
+        -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+        max-width: 100%;
+      }
+      img {
+        &:extend(.img-responsive, .center-block);
+      }
+    }
+  }
+}

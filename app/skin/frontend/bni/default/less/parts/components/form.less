@@ -1,0 +1,204 @@
+
+.form-list {
+	&:extend(.clearfix all);
+	li {
+		margin-bottom: 10px;
+    &.reseller {
+      > label { display: block; }
+      .validation-advice { bottom: -22px; }
+    }
+    &.three-fields > div {
+      white-space: nowrap;
+      -ms-flex-preferred-size: 0;
+          flex-basis: 0;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+      max-width: 100%;
+    }
+	}
+	.control label {
+		input, span {
+			margin: 0;
+			&:extend(.align-middle);
+		}
+	}
+}
+
+.wide,
+.fields .field {
+  > label {
+    margin-bottom: 0;
+    padding-left: 10px;
+  }
+}
+
+.fields {
+	display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+  > .customer-name {
+  	width: 100%;
+  	display: -ms-flexbox;
+	  display: flex;
+	  -ms-flex-wrap: wrap;
+	      flex-wrap: wrap;
+  }
+	.field {
+		position: relative;
+	  width: 100%;
+	  min-height: 1px;
+	  padding-right: 4px;
+	  padding-left: 4px;
+		-ms-flex: 0 0 50%;
+	      flex: 0 0 50%;
+	  max-width: 50%;
+    &.pagarme-cc-expr-month,
+    &.pagarme-cc-expr-year {
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+      width: auto;
+      max-width: none;
+      span {
+        margin-right: 5px;
+        display: inline-block;
+      }
+      select {
+        &:extend(.align-middle);
+      }
+    }
+    &.pagarme-cc-expr-year { padding-left: 0; }
+	}
+  > label {
+    padding-left: 10px;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+  }
+}
+
+.customer-dob {
+	display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+  > div {
+  	position: relative;
+	  width: 100%;
+	  min-height: 1px;
+	  padding-right: 4px;
+	  padding-left: 4px;
+	  &[class^="dob"] {
+		  -ms-flex-preferred-size: 0;
+		      flex-basis: 0;
+		  -ms-flex-positive: 1;
+		      flex-grow: 1;
+		  max-width: 100%;
+		  .validation-advice { display: none; }
+	  }
+  }
+}
+
+.input-btn {
+	position: relative;
+  display: table;
+  border-collapse: separate;
+  input {
+  	position: relative;
+	  z-index: 2;
+	  float: left;
+	  border-right: 0;
+	  width: 100% !important;
+	  margin-bottom: 0;
+    border-radius: 10px 0 0 10px;
+  }
+  .actions {
+  	width: 1%;
+  	display: table-cell;
+	  white-space: nowrap;
+	  vertical-align: middle;
+    button,
+    a,
+    .button {
+      padding: 8px 18px;
+      border-radius: 0 10px 10px 0;
+    }
+  }
+  .validation-advice { position: absolute; }
+}
+
+.checkbox-style,
+.radio-style {
+  line-height: 1;
+  vertical-align: middle;
+  input {
+    position: absolute;
+    visibility: hidden;
+    &:checked + span::before { content: "\2714"; }
+  }
+  span::before {
+    width: 15px;
+    height: 15px;
+    content: " ";
+    margin-right: 8px;
+    border-radius: 4px;
+    text-align: center;
+    color: @primaryColor;
+    display: inline-block;
+    vertical-align: text-bottom;
+    border: 2px solid @primaryColor;
+  }
+}
+
+.radio-style {
+  input:checked + span::before { content: "\2022"; }
+  span::before {
+    font-size: 19px;
+    line-height: .55;
+    border-radius: 50%;
+  }
+  &[for="p_method_pagarme_ccclub"] span::before { display: none; }
+  &[for="p_method_free"] span::before { display: none; }
+}
+
+.input-group {
+  .onestepcheckout-index-index & {
+    width: 100%;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    .input-text {
+      display: table-cell;
+      position: relative;
+      z-index: 2;
+      float: left;
+      width: 100%;
+      margin-bottom: 0;
+    }
+    .input-group-btn {
+      position: relative;
+      font-size: 0;
+      white-space: nowrap;
+      width: 1%;
+      white-space: nowrap;
+      vertical-align: top;
+      display: table-cell;
+      > i {
+        top: 12px;
+        left: -30px;
+        z-index: 10;
+        font-size: 14px;
+        position: absolute;
+      }
+      .btn {
+        padding: 7px 14px;
+        &:extend(.button);
+        i { vertical-align: middle; }
+      }
+    }
+  }
+}

@@ -1,0 +1,391 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Create account form template
+ *
+ * @see app/design/frontend/base/default/template/customer/form/register.phtml
+ */
+/** @var $this Mage_Customer_Block_Form_Register */
+?>
+<div class="account-create container">
+    <div class="page-title">
+        <h2><?php echo $this->__('Create an Account') ?></h2>
+    </div>
+    <?php echo $this->getChildHtml('form_fields_before')?>
+    <?php echo $this->getMessagesBlock()->toHtml() ?>
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate" class="scaffold-form" enctype="multipart/form-data">
+        <div class="fieldset">
+            <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+            <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+            <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+            <div class="block-left">
+                <div class="block-title">
+                    <h3 class="title"><?php echo $this->__('Personal Information') ?></h3>
+                </div>
+                <div class="block-content">
+                    <ul class="form-list">
+                        <?php $_tipopessoa = $this->getLayout()->createBlock('onestepcheckout/widget_tipopessoa');?>
+                        <?php if ($_tipopessoa->isEnabled()): ?>
+                            <li class="control fields tipopessoa">
+                                    <div class="field">
+                                    <input type="radio" name="radio_tipopessoa" value="Física" id="fisica" class="radio" title="CPF" <?php if ($this->getFormData()->getRadioTipopessoa() == 'Física'): ?> checked="checked"<?php endif; ?>/>
+                                        <label for="fisica"><?php echo $this->__('Individual person') ?></label>
+                                    </div>
+                                    <div class="field">
+                                        <input type="radio" name="radio_tipopessoa" value="Jurídica" id="juridica" class="radio" title="CNPJ" <?php if ($this->getFormData()->getRadioTipopessoa() == 'Jurídica'): ?> checked="checked"<?php endif; ?>/>
+                                        <label for="juridica"><?php echo $this->__('Legal Entity') ?></label>
+                                    </div>
+                                </li>
+                            </li>
+                            <li class="wide hide">
+                                <?php echo $_tipopessoa->setTipopessoa($this->getFormData()->getTipopessoa())->toHtml() ?>
+                            </li>
+                        <?php endif ?>
+                        <li class="fields">
+                            <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?>
+                        </li>
+                        <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
+                        <div class="fields">
+                            <?php if ($_taxvat->isEnabled()): ?>
+                                <div class="field">
+                                    <?php echo $_taxvat->setTaxvat($this->getFormData()->getTaxvat())->toHtml() ?>
+                                </div>
+                            <?php endif ?>
+                            <?php $_ie = $this->getLayout()->createBlock('onestepcheckout/widget_ie') ?>
+                            <?php if ($_ie->isEnabled()): ?>
+                                <div class="field ie-container">
+                                    <?php echo $_ie->setIe($this->getFormData()->getIe())->toHtml() ?>
+                                </div>
+                            <?php endif ?>
+                        </div>
+                        <div id="tipopessoa-area"  style="display:block;">
+                            <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
+                            <?php if ($_dob->isEnabled()): ?>
+                                <li class="field"><?php echo $_dob->setDate($this->getFormData()->getDob())->toHtml() ?></li>
+                            <?php endif ?>
+                            <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
+                            <?php if ($_gender->isEnabled()): ?>
+                                <?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() ?>
+                            <?php endif ?>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="block-center">
+                <div class="block-title">
+                    <h3 class="title"><?php echo $this->__('Address Information') ?></h3>
+                </div>
+                <div class="block-content">
+                    <ul class="form-list">
+                        <li class="wide">
+                                <label for="telephone" class="required"><em>*</em><?php echo $this->__('Fax') ?></label>
+                                <div class="input-box">
+                                    <input  type="tel" name="telephone" id="telephone" 
+                                            value="<?php echo $this->escapeHtml($this->getFormData()->getTelephone()) ?>" 
+                                            title="<?php echo $this->quoteEscape($this->__('Fax')) ?>" 
+                                            class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('telephone') ?>" 
+                                            alt="phone"/>
+                                </div>
+                            <?php /*
+                            <div class="field">
+                                <label for="fax"><?php echo $this->__('Fax') ?></label>
+                                <div class="input-box">
+                                    <input  type="tel" name="fax" id="fax" 
+                                            value="<?php echo $this->escapeHtml($this->getFormData()->getFax()) ?>" 
+                                            title="<?php echo Mage::helper('core')->quoteEscape($this->__('Fax')) ?>" 
+                                            class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('fax') ?>"  
+                                            alt="phone" />
+                                </div>
+                            </div>
+                            */ ?>
+                        </li>
+                        <li class="fields">
+                            <div class="field">
+                                <label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                                <div class="input-box">
+                                    <input  type="text" name="postcode" id="zip"
+                                            value="<?php echo $this->escapeHtml($this->getFormData()->getPostcode()) ?>" 
+                                            title="<?php echo $this->quoteEscape($this->__('Zip/Postal Code')) ?>"  
+                                            class="input-text validate-zip-br <?php echo $this->helper('customer/address')->getAttributeValidationClass('postcode') ?>" 
+                                            alt="cep" 
+                                            placeholder="00000-000"/>
+                                </div>
+                            </div>
+                            <div class="field" style="display: none;">
+                                <label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+                                <div class="input-box">
+                                    <?php echo $this->getCountryHtmlSelect() ?>
+                                </div>
+                            </div>
+                        </li>
+                        <?php $_streetValidationClass = $this->helper('customer/address')->getAttributeValidationClass('street'); ?>
+                        <li class="wide">
+                            <label for="street1" class="required"><em>*</em><?php echo $this->__('Street Address') ?></label>
+                            <div class="input-box">
+                                <input  type="text" name="street[]" id="street1" 
+                                        value="<?php echo $this->escapeHtml($this->getFormData()->getStreet(0)) ?>" 
+                                        title="<?php echo $this->quoteEscape($this->__('Street Address')) ?>"  
+                                        class="input-text <?php echo $_streetValidationClass ?>"
+                                        placeholder="Endereço" />
+                            </div>
+                        </li>
+                        <li class="wide">
+                            <label for="street2" class="required"><em>*</em><?php echo $this->__('Street Address 2') ?></label>
+                            <div class="input-box">
+                                <input  type="text" name="street[]" id="street2" 
+                                        value="<?php echo $this->escapeHtml($this->getFormData()->getStreet(1)) ?>" 
+                                        title="<?php echo $this->quoteEscape($this->__('Street Address 2')) ?>"  
+                                        class="input-text <?php echo $_streetValidationClass ?>"
+                                        placeholder="Número" maxlength="10"/>
+                            </div>
+                        </li>
+                        <li class="wide">
+                            <label for="street3"><?php echo $this->__('Street Address 3') ?></label>
+                            <div class="input-box">
+                                <input  type="text" name="street[]" id="street3" 
+                                        value="<?php echo $this->escapeHtml($this->getFormData()->getStreet(2)) ?>" 
+                                        title="<?php echo $this->quoteEscape($this->__('Street Address 3')) ?>"  
+                                        class="input-text"
+                                        placeholder="Complemento" />
+                            </div>
+                        </li>
+                        <li class="wide">
+                            <label for="street4" class="required"><em>*</em><?php echo $this->__('Street Address 4') ?></label>
+                            <div class="input-box">
+                                <input  type="text" name="street[]" id="street4" 
+                                        value="<?php echo $this->escapeHtml($this->getFormData()->getStreet(2)) ?>" 
+                                        title="<?php echo $this->quoteEscape($this->__('Street Address 4')) ?>"  
+                                        class="input-text <?php echo $_streetValidationClass ?>" 
+                                        placeholder="Bairro"/>
+                            </div>
+                        </li>
+                        <li class="fields">
+                            <div class="field">
+                                <label for="city" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+                                <div class="input-box">
+                                    <input  type="text" name="city" id="city" 
+                                            value="<?php echo $this->escapeHtml($this->getFormData()->getCity()) ?>" 
+                                            title="<?php echo $this->quoteEscape($this->__('City')) ?>" 
+                                            class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('city') ?>" />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="region_id" class="required"><em>*</em><?php echo $this->__('State/Province') ?></label>
+                                <div class="input-box">
+                                    <select id="region_id" name="region_id" title="<?php echo $this->quoteEscape($this->__('State/Province')) ?>" class="validate-select">
+                                        <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                                    </select>
+                                    <script type="text/javascript">
+                                    //<![CDATA[
+                                        $('region_id').setAttribute('defaultValue', "<?php echo $this->getFormData()->getRegionId() ?>");
+                                    //]]>
+                                    </script>
+                                    <input type="text" id="region" name="region" value="<?php echo $this->escapeHtml($this->getRegion()) ?>" title="<?php echo $this->quoteEscape($this->__('State/Province')) ?>" class="input-text <?php echo $this->helper('customer/address')->getAttributeValidationClass('region') ?>" style="display:none;" />
+                                </div>
+                            </div>
+                        </li>
+                        <li class="hidden">
+                            <input type="hidden" name="create_address" value="1" />
+                        </li>
+                        <li class="hidden">
+                            <input type="hidden" name="default_billing" value="1" />
+                            <input type="hidden" name="default_shipping" value="1" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="block-right">
+                <div class="block-title">
+                    <h3 class="title"><?php echo $this->__('Login Information') ?></h3>
+                </div>
+                <div class="block-content">
+                    <ul class="form-list">
+                        <li>
+                            <label for="email_address" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                            <div class="input-box">
+                            <?php 
+                                    $gemail = Mage::getSingleton('customer/session')->getGemail();
+                                    $formdataEmail = $this->escapeHtml($this->getFormData()->getEmail());
+                                    $email = $gemail != null? $gemail : $formdataEmail;
+                                ?>
+                                <input  type="email" name="email" id="email_address" 
+                                        autocapitalize="off" autocorrect="off" spellcheck="false"
+                                        value="<?php echo $email?>" 
+                                        title="<?php echo $this->quoteEscape($this->__('Email Address')) ?>" 
+                                        class="input-text validate-email required-entry validate-email-exist"/>
+                            </div>
+                        </li>
+                        <li class="fields">
+                            <div class="field">
+                                <label for="password" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+                                <div class="input-box">
+                                    <input  type="password" name="password" id="password" 
+                                            title="<?php echo $this->quoteEscape($this->__('Password')) ?>" 
+                                            class="input-text required-entry validate-password" />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label for="confirmation" class="required"><em>*</em><?php echo $this->__('Confirm Password') ?></label>
+                                <div class="input-box">
+                                    <input  type="password" name="confirmation" id="confirmation" 
+                                            title="<?php echo $this->quoteEscape($this->__('Confirm Password')) ?>" 
+                                            class="input-text required-entry validate-cpassword" />
+                                </div>
+                            </div>
+                        </li>
+                        <?php echo $this->getChildHtml('form.additional.info'); ?>
+                        <?php if ($this->isNewsletterEnabled()): ?>
+                            <li class="control">
+                                <div class="input-box">
+                                    <label class="checkbox-style subscribed" for="is_subscribed">
+                                        <input type="checkbox" name="is_subscribed" title="<?php echo $this->quoteEscape($this->__('Sign Up for Newsletter')) ?>" value="1" id="is_subscribed"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> />
+                                        <span><?php echo $this->__('Sign Up for Newsletter') ?></span>
+                                    </label>
+                                </div>
+                            </li>
+                        <?php endif ?>
+                        <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+                    </ul>
+                    <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
+                </div>
+            </div>
+            <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        </div>
+        <div class="buttons-set">
+            <button type="submit" title="<?php echo $this->quoteEscape($this->__('Register')) ?>" class="button"><span><span><?php echo $this->__('Register') ?></span></span></button>
+        </div>
+        <?php if (Mage::helper('checkout')->isContextCheckout()): ?>
+            <input name="context" type="hidden" value="checkout" />
+        <?php endif; ?>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('form-validate', true);
+        new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+
+        $$("input[name*='radio_tipopessoa']").invoke('on', 'click', function() {
+            var sel = $('tipopessoa');
+            setTipopessoaArea(this.value);
+            for (var i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].text == this.value) {
+                    sel.options[i].selected = true;
+                }
+            }
+        });
+        jQuery('#taxvat').setMask("999.999.999-99");
+
+        function setTipopessoaArea(arg) {
+            if (arg == 'Jurídica') {
+                if ($('taxvat')) {
+                    $('ie').maxLength = 30;
+                    $$('label[for="ie"]').first().update('<em>*</em>IE (Inscrição Estadual)');
+                    $$('label[for="taxvat"]').first().update('<em>*</em>CNPJ');
+                    $$('label[for="firstname"]').first().update('<em>*</em>Razão social');
+                    $$('label[for="lastname"]').first().update('<em>*</em>N. Fantasia');
+                    $$('input[name="taxvat"]').first().writeAttribute('title','CNPJ');
+                    $$('input[name="ie"]').first().writeAttribute('title','IE (Inscrição Estadual)');
+                    $$('input[name="firstname"]').first().writeAttribute('title','Razão social');
+                    $$('input[name="lastname"]').first().writeAttribute('title','N. Fantasia');
+                    $('tipopessoa-area').hide();
+                    jQuery(".ie-container").show();
+                    jQuery('#taxvat').setMask("99.999.999/9999-99");
+                }
+            } else {
+                if ($('taxvat')) {
+                    $('ie').maxLength = 30;
+                    jQuery(".ie-container").hide();
+                    $$('label[for="taxvat"]').first().update('<em>*</em>CPF');
+                    $$('label[for="ie"]').first().update('<em>*</em>RG');
+                    $$('label[for="firstname"]').first().update('<em>*</em>Nome');
+                    $$('label[for="lastname"]').first().update('<em>*</em>Sobrenome');
+                    $$('input[name="taxvat"]').first().writeAttribute('title','CPF');
+                    $$('input[name="ie"]').first().writeAttribute('title','RG');
+                    $$('input[name="firstname"]').first().writeAttribute('title','Nome');
+                    $$('input[name="lastname"]').first().writeAttribute('title','Sobrenome');
+                    $('tipopessoa-area').show();
+                    jQuery('#taxvat').setMask("999.999.999-99");
+                }
+            }
+        }
+        <?php if (is_null($this->getFormData()->getRadioTipopessoa())): ?>
+            $$("input[name*='radio_tipopessoa']")[0].click();
+        <?php else: ?>
+            if ($('tipopessoa')) {
+                setTipopessoaArea('<?php echo $this->getFormData()->getRadioTipopessoa() ?>');
+            }
+        <?php endif; ?>
+
+        Validation.add('validate-taxvat', '<?php echo $this->__('This is a required field.') ?>', function(value) {
+            if (validaCPF(value,0)) {
+                return true;
+             }else{
+                Validation.get('validate-taxvat').error = 'O CNPJ/CPF informado \xE9 inválido';
+             }
+        });
+
+        Validation.add('validate-email-exist', '<?php echo $this->__('Please enter a valid email address. For example johndoe@domain.com.') ?>', function(value) {
+            if (checkMail(value)) {
+                var ok = false;
+                var url = '<?php echo Mage::getUrl('onestepcheckout/ajax/check_email/')?>';
+                new Ajax.Request(url, {
+                    method: 'post',
+                    asynchronous: false,
+                    parameters: 'email=' + encodeURIComponent(value),
+                    onSuccess: function(transport) {
+                        var obj = response = eval('(' + transport.responseText + ')');
+                        validateTrueEmailMsg = obj.status_desc;
+                            if (obj.result !== 'clean') {
+                                Validation.get('validate-email-exist').error = 'Email já cadastrado';
+                                ok = false;
+                            } else {
+                                ok = true;
+                            }
+                        },
+                        onComplete: function() {
+                            if ($('advice-validate-email-exist-email')) {
+                              $('advice-validate-email-exist-email').remove();
+                            }
+                        }
+                    });
+                return ok;
+            }else{
+                Validation.get('validate-email').error = '<?php echo $this->__('Please enter a valid email address. For example johndoe@domain.com.') ?>';
+            }
+        });
+
+        Validation.add('validate-zip-br', 'Por favor insira um CEP válido. por exemplo 12345678.', function(v) {
+            return Validation.get('IsEmpty').test(v) || /(^\d{8}$)|(^\d{5}-\d{3}$)/.test(v);
+        });
+        Validation.add('validate-phone-br', 'Por favor insira um número de telefone válido. por exemplo (xx) x4567-8900.', function(v) {
+            return Validation.get('IsEmpty').test(v) || /^(\()?\d{2}(\))?(-|\s)?\d{5}(-|\s)\d{4}|(\()?\d{2}(\))?(-|\s)?\d{4}(-|\s)\d{4}$/.test(v);
+        });
+    //]]>
+    </script>
+</div>

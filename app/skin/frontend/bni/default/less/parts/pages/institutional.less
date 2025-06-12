@@ -1,0 +1,177 @@
+
+// .cms-page-view {
+//   .page-title {
+//     margin-top: 30px;
+//     margin-bottom: 25px;
+//     h1 { margin-top: 5px; }
+//   }
+//   .std {
+//     font-size: 16px;
+//     line-height: 1.5;
+//     p { margin-bottom: 20px; }
+//     ul {
+//       list-style: disc;
+//       padding-left: 20px;
+//       margin-bottom: 10px;
+//     }
+//     img {
+//       height: auto;
+//       display: block;
+//       max-width: 100%;
+//     }
+//   }
+//   .col1-layout .col-main {
+//     float: none;
+//     margin-bottom: 50px;
+//     &:extend(.container all);
+//   }
+//   .mission-vision {
+//     &:extend(.row-flex);
+//     margin-left: -11px;
+//     margin-right: -11px;
+//     > div {
+//       &:extend(.col);
+//       padding-left: 11px;
+//       padding-right: 11px;
+//       @media (min-width: 768px) {
+//         -ms-flex: 0 0 50%;
+//             flex: 0 0 50%;
+//         max-width: 50%;
+//       }
+//     }
+//     .box {
+//       padding: 21px;
+//       color: #525252;
+//       font-size: 16px;
+//       line-height: 1.5;
+//       min-height: 193px;
+//       text-align: center;
+//       margin-bottom: 15px;
+//       background-color: #faf4dc;
+//       h2 {
+//         margin-top: 0;
+//         color: #231f20;
+//         font-size: 20px;
+//         margin-bottom: 25px;
+//         padding-bottom: 10px;
+//         letter-spacing: 2.4px;
+//         text-transform: uppercase;
+//         border-bottom: 1px solid #000;
+//       }
+//     }
+//   }
+//   .box-manifest {
+//     display: flex;
+//     font-size: 16px;
+//     min-height: 100px;
+//     align-items: center;
+//     margin-bottom: 15px;
+//     justify-content: center;
+//     border: 4px double fade(@brown, 50%);
+//   }
+// }
+
+.institutional-page {
+  background-color: #fff;
+  .col-main {
+    display: flex;
+    flex-wrap: wrap;
+    .institutional-sidebar {
+      &:extend(.col);
+      @media (min-width: 768px) {
+        padding-right: 30px;
+        -ms-flex: 0 0 30%;
+            flex: 0 0 30%;
+        max-width: 30%;
+      }
+      @media (min-width: 992px) {
+        padding-right: 30px;
+        -ms-flex: 0 0 25%;
+            flex: 0 0 25%;
+        max-width: 25%;
+      }
+      ul {
+        > li {
+          margin-bottom: 8px;
+          a {
+            color: #666;
+            padding: 8px;
+            display: flex;
+            border-radius: 2px;
+            align-items: center;
+            text-decoration: none;
+            border: 1px solid fade(#000, 10%);
+            &:hover {
+              color: @primaryColor;
+              border-color: @primaryColor;
+            }
+            .icon {
+              width: 30px;
+              margin-right: 8px;
+              text-align: center;
+              i {
+                font-size: 20px;
+                color: @primaryColor;
+              }
+            }
+          }
+        }
+      }
+    }
+    .content {
+      &:extend(.col);
+      @media (min-width: 768px) {
+        -ms-flex: 0 0 70%;
+            flex: 0 0 70%;
+        max-width: 70%;
+      }
+      @media (min-width: 992px) {
+        -ms-flex: 0 0 75%;
+            flex: 0 0 75%;
+        max-width: 75%;
+      }
+      .page-title h1 { margin-top: 0; }
+      p { margin-bottom: 10px; }
+      img {
+        height: auto;
+        display: block;
+        max-width: 100%;
+        margin-bottom: 15px;
+      }
+      .imgs {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        justify-content: space-between;
+        img {
+          display: inline-block;
+        }
+      }
+      ol {
+        color: #333;
+        list-style: none;
+        line-height: 1.5;
+        margin-bottom: 10px;
+        strong { color: @primaryColor; }
+        ol { padding-left: 18px; }
+        li {
+          margin-left: 0;
+          margin-bottom: 6px;
+        }
+      }
+      .embed-responsive { margin-bottom: 20px; }
+      .sac-box {
+        padding: 15px;
+        display: flex;
+        margin-bottom: 20px;
+        border: 1px solid @primaryColor;
+        .icon {
+          line-height: 1;
+          font-size: 30px;
+          padding-right: 20px;
+          color: @primaryColor;
+        }
+      }
+    }
+  }
+}

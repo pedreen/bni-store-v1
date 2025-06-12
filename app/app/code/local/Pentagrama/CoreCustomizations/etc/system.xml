@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<pentagrama>
+			<label>Pentagrama</label>
+			<sort_order>100</sort_order>
+		</pentagrama>
+	</tabs>
+	<sections>
+		<general>
+			<groups>
+				<store_information>
+					<fields>
+						<whatsapp translate="label">
+							<label>Whatsapp</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>21</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</whatsapp>
+					</fields>
+				</store_information>
+			</groups>
+		</general>
+		<design>
+			<groups>
+				<header>
+					<fields>
+						<logo_src>
+							<comment>Allowed file types: jpg, jpeg, gif, png. To make logo look good on high-resolution displays, upload an image that is 2x normal size and then specify 1x dimensions in width/height fields below.</comment>
+							<frontend_type>image</frontend_type>
+							<backend_model>corecustomizations/adminhtml_system_config_backend_header_logo</backend_model>
+							<base_url type="media" scope_info="1">header/logo</base_url>
+						</logo_src>
+						<logo_src_small>
+							<show_in_default>0</show_in_default> 
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</logo_src_small>
+					</fields>
+				</header>
+			</groups>
+		</design>
+	</sections>
+</config>

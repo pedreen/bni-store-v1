@@ -1,0 +1,65 @@
+
+.button,
+.button-login {
+	color: #fff;
+	border: none;
+	outline: none;
+	font-size: 16px;
+	cursor: pointer;
+	font-weight: 500;
+	line-height: 1.45;
+	padding: 6px 12px;
+	text-align: center;
+	border-radius: 10px;
+	white-space: nowrap;
+	letter-spacing: .2px;
+	text-decoration: none;
+	background-color: @primaryColor;
+	transition: all .15s ease-in-out;
+	&:extend(.align-middle);
+	&:hover {
+		background-color: darken(@primaryColor, 10%);
+	}
+	&:focus { outline: none; }
+	&.btn-xs {
+		font-size: 14px;
+		padding: 5px 10px;
+	}
+	&.outline {
+		color: @primaryColor;
+		border-color: transparent;
+		background-color: transparent;
+		&:hover { border-color: @primaryColor; }
+	}
+}
+
+.back-link a {
+	&:extend(.button all);
+}
+
+.btn-cart,
+.btn-checkout,
+.btn-add-to-cart {
+	font-size: 16px;
+	font-weight: 600;
+	letter-spacing: -0.3px;
+	@media (min-width: 768px) {
+		padding: 0;
+		height: 40px;
+		line-height: 40px;
+	}
+}
+
+.btn-cart,
+.btn-checkout,
+.checkout-button,
+.btn-add-to-cart {
+	color: @btnColor;
+	background-color: @btnBackgroundColor;
+	&:hover { background-color: lighten(@btnHoverColor, 5%); }
+}
+
+.btn-proceed-checkout{
+	padding-left: 10px;
+	padding-right: 10px;
+}

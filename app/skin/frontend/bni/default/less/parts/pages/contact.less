@@ -1,0 +1,56 @@
+
+.contacts-index-index {
+  .main-container .content {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 500px;
+    align-items: flex-start;
+    @media (min-width: 1030px) { max-width: 1000px; }
+    > div {
+      width: 100%;
+      min-height: 1px;
+      position: relative;
+      margin-bottom: 20px;
+      @media (min-width: 992px) {
+        -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+        max-width: 100%;
+      }
+      &.opening-hours {
+        color: #999;
+        display: flex;
+        font-size: 14px;
+        align-items: center;
+        @media (min-width: 992px) {
+          font-size: 16px;
+          padding-left: 30px;
+          -ms-flex: 0 0 auto;
+              flex: 0 0 auto;
+          width: auto;
+          max-width: 100%;
+        }
+        .icon {
+          font-size: 30px;
+          padding-right: 20px;
+          color: @primaryColor;
+        }
+      }
+    }
+    .buttons-set {
+      @media (max-width: 991px) {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      button.button {
+        @media (max-width: 991px) {
+          margin: 0;
+          float: none;
+          height: 40px;
+        }
+      }
+    }
+    textarea { max-width: 365px; }
+  }
+}

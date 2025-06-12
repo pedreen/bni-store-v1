@@ -1,0 +1,117 @@
+
+.catalog-category-view,
+.catalogsearch-result-index {
+  .col-left {
+    min-height: 33px;
+    @media (min-width: 768px) { width: 26%; }
+    .currently, .actions { display: none; }
+  }
+  .col-main {
+    @media (max-width: 767px) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    @media (min-width: 768px) { width: 74%; }
+    .category-image {
+      border: initial;
+      padding: 0;
+    }
+  }
+  .page-title.category-title {
+    margin-top: 0;
+    min-height: 21px;
+    margin-bottom: 15px;
+    @media (min-width: 768px) {
+      margin-bottom: 30px;
+    }
+    h1 {
+      min-height: 21px;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.block-layered-nav {
+  .block-title strong { color: @primaryColor; }
+  .block-content {
+    overflow: hidden;
+    &.accordion-open > dl > dt.current::after {
+      @media only screen and (max-width: 770px) { border-top: 4px solid @primaryColor; }
+    }
+    .block-subtitle.block-subtitle--filter {
+      margin-bottom: 0;
+      border-radius: 8px;
+      background-color: @primaryColor;
+    }
+    > dl {
+      margin-top: 20px;
+      padding-top: 15px;
+      &.no-display {
+        @media (min-width: 768px) { display: block !important; }
+        @media (max-width: 767px) {
+          height: 0;
+          margin: 0 !important;
+          border: 0 !important;
+          padding: 0 !important;
+        }
+      }
+      @media (min-width: 768px) { min-height: 367px; }
+      dt {
+        color: #000;
+        font-size: 13px;
+        font-weight: 600;
+        padding-left: 20px;
+        position: relative;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        &:hover { color: @primaryColor; }
+        &::after {
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-top: 4px solid @primaryColor;
+          @media (max-width: 767px) { border-left: 4px solid @primaryColor; }
+        }
+      }
+      > dd { padding: 10px 20px; }
+      #mageinnSliderWrap { padding: 0 10px; }
+      .noUi-connect {
+        top: 2px;
+        bottom: 2px;
+        background-color: @primaryColor;
+      }
+      .noUi-handle {
+        top: 50%;
+        width: 14px;
+        height: 14px;
+        border: none;
+        color: @primaryColor;
+        box-shadow: none;
+        margin-top: -7px;
+        border-radius: 50%;
+        background-color: @primaryColor;
+        &::before,
+        &::after { display: none; }
+      }
+      .checkbox {
+        display: block;
+        label {
+          color: #333;
+          font-size: 14px;
+          font-weight: 400;
+          padding-left: 25px;
+          margin-bottom: 15px;
+          &::before {
+            top: 1px;
+            width: 15px;
+            height: 15px;
+            border-radius: 2px;
+          }
+          &::after { color: @primaryColor; }
+        }
+        .count {
+          color: #888;
+        }
+      }
+    }
+  }
+}

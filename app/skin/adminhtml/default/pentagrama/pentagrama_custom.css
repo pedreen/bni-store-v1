@@ -1,0 +1,28 @@
+/*
+* @Author: Warley Elias
+* @Date:   2021-04-30 13:18:23
+* @Last Modified by:   Warley Elias
+* @Last Modified time: 2022-05-24 10:10:22
+*/
+
+.nav-bar {
+	padding: 0 350px 0 155px !important;
+}
+.header-top .logo {
+	padding: 0px 10px;
+}
+.login-container { 
+	background:url(images/login_logo.png) no-repeat;
+}
+
+#nav {
+	padding-right: 0px;
+}
+
+#nav li.active {
+	z-index: initial;
+}
+
+#nav ul {
+	z-index: 9999;
+}

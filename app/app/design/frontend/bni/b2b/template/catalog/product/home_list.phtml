@@ -1,0 +1,75 @@
+
+<div class="container">
+    <?php
+    /*Pentagrama_HomeList_Block_Catalog_Product_List*/
+    ?>
+    <?php $_imgSize = 250; ?>
+    <?php if (($_products = $this->getLoadedProductCollection()) && $_products->getSize()): ?>
+    <?php $_columnCount = $this->getColumnCount(); ?>
+    <?php $_params = $this->escapeHtml(json_encode(array('form_key' => $this->getFormKey()))); ?>
+        <div class="products-grid-title">
+            <?php if($this->getCategoryUrl()):?>
+                <a href="<?php echo Mage::getUrl($this->getCategoryUrl());?>">
+            <?php endif;?>
+            <h2><?php echo $this->getTitle() ?><?php echo $this->getCategoryUrl() ? ' +' : '';?></h2>
+            <?php if($this->getCategoryUrl()):?>
+                </a>
+            <?php endif;?>
+        </div>
+        <ul class="products-grid">
+            <?php $i=0; foreach ($_products->getItems() as $_product): ?>
+                <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
+                    <div class="regular">
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_product->getName()) ?>" class="product-image">
+                            <?php echo $this->getHighlightsLabel($_product);?>
+                            <?php echo $this->getDiscountLabel($_product);?>
+                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize($_imgSize) ?>" alt="<?php echo $this->escapeHtml($_product->getName()) ?>" width="<?php echo $_imgSize ?>" height="<?php echo $_imgSize ?>" />
+                        </a>
+                        <div class="product-info">
+                            <h6 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_product->getName()) ?>"><?php echo $this->escapeHtml($_product->getName()) ?></a></h6>
+                            <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                            <?php echo $this->getPriceHtml($_product, true, '-new') ?>
+                            <div class="actions">
+                                <?php if($_product->isSaleable()): ?>
+                                    <?php if (Mage::getSingleton('customer/session')->isLoggedIn()) : ?>
+                                        <button type="button"
+                                                title="<?php echo Mage::helper('core')->quoteEscape($this->__('Add to Cart')) ?>"
+                                                class="button btn-cart"
+                                                onclick="customFormSubmit(
+                                                        '<?php echo $this->getAddToCartUrlCustom($_product, array(), false) ?>',
+                                                        '<?php echo $_params ?>',
+                                                        'post')">
+                                            <span><span><?php echo $this->__('Add to Cart') ?></span></span>
+                                        </button>
+                                    <?php endif; ?>
+                                <?php else: ?>
+                                    <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hover">
+                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_product->getName()) ?>" class="product-image">
+                            <?php echo $this->getHighlightsLabel($_product);?>
+                            <?php echo $this->getDiscountLabel($_product);?>
+                            <img src="<?php echo $this->getHoverImage($_product, $_imgSize); ?>" alt="<?php echo $this->escapeHtml($_product->getName()) ?>" width="<?php echo $_imgSize ?>" height="<?php echo $_imgSize ?>" />
+                        </a>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+</div>
+
+<?php
+// Provides a block where additional page components may be attached, primarily good for in-page JavaScript
+if ($this->getChild('after')) {
+    $_afterChildren = $this->getChild('after')->getSortedChildren();
+    foreach ($_afterChildren as $_afterChildName) {
+        $_afterChild = $this->getChild('after')->getChild($_afterChildName);
+        //set product collection on after blocks
+        $_afterChild->setProductCollection($_products);
+        echo $_afterChild->toHtml();
+    }
+}
+?>
