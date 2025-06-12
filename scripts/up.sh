@@ -10,4 +10,4 @@ docker compose -f "${CURRENT_DIR}/../compose.yml" up -d
 echo "Updating permissions for writeable dirs..."
 sudo chmod a+w "${CURRENT_DIR}/../logs"
 sudo chmod a+w "${CURRENT_DIR}/../reports"
-docker-compose -f "${CURRENT_DIR}/../docker-compose.yml" exec magento chmod a+w /var/www/html/media -R
+sudo chmod a+w "${CURRENT_DIR}/../media"

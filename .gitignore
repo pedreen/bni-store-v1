@@ -1,4 +1,4 @@
 config/*.xml
 .env
-medi
+media/
 .*

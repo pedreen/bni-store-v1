@@ -50,7 +50,7 @@
             </db>
             <default_setup>
                 <connection>
-                    <host><![CDATA[host.mysql.com]]></host>
+                    <host><![CDATA[host.docker.internal]]></host>
                     <username><![CDATA[lead]]></username>
                     <password><![CDATA[123456]]></password>
                     <dbname><![CDATA[magento]]></dbname>
@@ -65,7 +65,7 @@
 	<cache>
             <backend>Cm_Cache_Backend_Redis</backend>
             <backend_options>
-                <server>host.redis</server>
+                <server>redis</server>
                 <port>6379</port>
                 <persistent></persistent>
                 <database>0</database>
@@ -83,7 +83,7 @@
         </cache>
         <session_save>db</session_save>
         <redis_session>
-            <host>host.redis</host>
+            <host>redis</host>
             <port>6379</port>
             <password></password>
             <timeout>2.5</timeout>

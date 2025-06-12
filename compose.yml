@@ -11,27 +11,26 @@ services:
     working_dir: /var/www/html
     env_file: .env
     volumes:
-      - bnimagento_media:/var/www/html/media
+      - ./media:/var/www/html/media
       - ./app:/var/www/html
       - ./reports:/var/www/html/var/report
       - ./logs:/var/www/html/var/log
       - ./config/local.xml:/var/www/html/app/etc/local.xml
-    networks:
-      - infra
-      - internal
     restart: "unless-stopped"
     logging:
       driver: "json-file"
       options:
         max-size: "10M"
         max-file: "5"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "8789:80"
   redis:
     image: valkey/valkey:8.0.3-alpine3.21
     container_name: magento-redis
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-    networks:
-      - internal
     restart: unless-stopped
     logging:
       driver: "json-file"
@@ -39,12 +38,5 @@ services:
         max-size: "10M"
         max-file: "5"
 
-volumes:
-  bnimagento_media:
-    external: true
-
 networks:
-  infra:
-    external: true
-    name: infra
   internal:
